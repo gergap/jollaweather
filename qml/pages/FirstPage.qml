@@ -46,10 +46,6 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
             }
             MenuItem {
-                text: "Test"
-                onClicked: pageStack.push(Qt.resolvedUrl("LocationDialog.qml"));
-            }
-            MenuItem {
                 text: "Refresh"
                 onClicked: console.log("Refresh");
             }
