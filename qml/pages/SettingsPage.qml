@@ -32,7 +32,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 
-Page {
+Dialog {
     id: page
     SilicaFlickable {
         anchors.fill: parent
@@ -47,8 +47,9 @@ Page {
 
             width: page.width
             spacing: Theme.paddingLarge
-            PageHeader {
+            DialogHeader {
                 title: "Settings"
+                acceptText: "Accept"
             }
             Label {
                 x: Theme.paddingLarge
@@ -66,8 +67,10 @@ Page {
                text: "Search"
                onClicked: {
                    var dialog = pageStack.push(Qt.resolvedUrl("LocationDialog.qml"), {"search": location.text});
+                   dialog.search = location.text;
                    dialog.accepted.connect(function() {
                        location.text = dialog.location;
+                       location.text = dialog.city_code;
                    })
                }
 
