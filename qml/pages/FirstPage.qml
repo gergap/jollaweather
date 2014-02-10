@@ -30,7 +30,8 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
+import QtQuick.XmlListModel 2.0
+import "wettercom.js" as Wetter
 
 Page {
     id: page
@@ -47,7 +48,9 @@ Page {
             }
             MenuItem {
                 text: "Refresh"
-                onClicked: console.log("Refresh");
+                onClicked: {
+                    xmlModel.source = Wetter.weatherUrl("DE0007131");
+                }
             }
         }
 
@@ -69,6 +72,95 @@ Page {
                 text: "Nuremberg"
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraLarge
+            }
+            Label {
+                id: one
+                x: Theme.paddingLarge
+            }
+            Label {
+                id: two
+                x: Theme.paddingLarge
+            }
+            Label {
+                id: three
+                x: Theme.paddingLarge
+            }
+            Label {
+                id: four
+                x: Theme.paddingLarge
+            }
+            Label {
+                id: five
+                x: Theme.paddingLarge
+            }
+            Label {
+                id: six
+                x: Theme.paddingLarge
+            }
+            Label {
+                id: seven
+                x: Theme.paddingLarge
+            }
+            Image {
+                id: imgWeather
+                source: "/usr/share/JollaWeather/icons/d_0_L.png"
+                smooth: true
+            }
+            Image {
+                id: imgWind
+            }
+        }
+
+        BusyIndicator {
+            running: opacity != 0
+            anchors.centerIn: parent
+            opacity: xmlModel.status === XmlListModel.Loading ? 1 : 0
+
+            Behavior on opacity {
+                FadeAnimation {}
+            }
+        }
+    }
+
+    /*
+    d Lokale Zeit (Unix timestamp)
+    p Gültigkeitszeitraum der Prognose
+    w Code für den Wetterzustand
+    tn min temp celsius
+    tx max temp celsius
+    pc niederschlagswahrscheinlichkeit
+    wd windrichtung in grad
+    ws windgeschw in km/h
+    */
+    XmlListModel {
+        id: xmlModel
+        query: "/city/forecast/date"
+        XmlRole { name: "w";     query: "w/string()" }
+        XmlRole { name: "tn";    query: "tn/string()" }
+        XmlRole { name: "tx";    query: "tx/string()" }
+        XmlRole { name: "d";     query: "d/string()" }
+        XmlRole { name: "dn";    query: "dn/string()" }
+        XmlRole { name: "p";     query: "p/string()" }
+        XmlRole { name: "pc";    query: "pc/string()" }
+        XmlRole { name: "w_txt"; query: "w_txt/string()" }
+        XmlRole { name: "wd_txt"; query: "wd_txt/string()" }
+        onSourceChanged: {
+            console.log("new source");
+        }
+        onStatusChanged: {
+            if (status === XmlListModel.Ready) {
+                if (xmlModel.count > 0) {
+                    one.text   = "Min: "+xmlModel.get(0).tn+"°C";
+                    two.text   = "Max: "+xmlModel.get(0).tx+"°C";
+                    three.text = "Niederschlag: "+xmlModel.get(0).pc+"%";
+                    four.text  = "Wind: "+xmlModel.get(0).ws+"km/h";
+                    five.text  = xmlModel.get(0).p;
+                    six.text   = xmlModel.get(0).w_txt;
+                    seven.text   = xmlModel.get(0).wd_txt;
+
+                    imgWeather.source = "/usr/share/JollaWeather/icons/d_"+xmlModel.get(0).w+"_L.png";
+                    imgWind.source = "/usr/share/JollaWeather/icons/"+xmlModel.get(0).wd_txt+".png";
+                }
             }
         }
     }

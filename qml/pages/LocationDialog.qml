@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
+import "wettercom.js" as Wetter
 
 Dialog {
     id: page
@@ -61,7 +62,6 @@ Dialog {
 
     XmlListModel {
         id: xmlModel
-        //source: "http://api.wetter.com/location/index/search/nürnberg/project/kde/cs/4fd63506846eb01b94f944cb706abbac"
         query: "/search/result/item"
         XmlRole { name: "city_code"; query: "city_code/string()" }
         XmlRole { name: "plz"; query: "plz/string()" }
@@ -73,12 +73,7 @@ Dialog {
     }
 
     onSearchChanged: {
-        var project = "kde";
-        var apiKey = "14747763f53dc0e27f42c945e96532ef";
-        var input = project+apiKey+search;
-        var md5 = Qt.md5(input);
-        var url = "http://api.wetter.com/location/index/search/"+search+"/project/"+project+"/cs/"+md5;
-        xmlModel.source = url;
+        xmlModel.source = Wetter.mixedSearchUrl(search);
     }
 
     onDone: {

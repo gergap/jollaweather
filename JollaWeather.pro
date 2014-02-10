@@ -20,5 +20,13 @@ OTHER_FILES += qml/JollaWeather.qml \
     rpm/JollaWeather.yaml \
     JollaWeather.desktop \
     qml/pages/SettingsPage.qml \
-    qml/pages/LocationDialog.qml
+    qml/pages/LocationDialog.qml \
+    qml/pages/wettercom.js
+
+icons.files = wetter.com_icons/*.png
+icons.files += wetter.com_icons_wind/*.png
+icons.path = $$DEPLOYMENT_PATH/usr/share/JollaWeather/icons
+INSTALLS += icons
+
+#RESOURCES += jollaweather.qrc
 
