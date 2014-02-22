@@ -21,7 +21,9 @@ OTHER_FILES += qml/JollaWeather.qml \
     JollaWeather.desktop \
     qml/pages/SettingsPage.qml \
     qml/pages/LocationDialog.qml \
-    qml/pages/wettercom.js
+    qml/pages/wettercom.js \
+    qml/pages/WeatherDelegate.qml \
+    qml/pages/WeatherPage.qml
 
 icons.files = wetter.com_icons/*.png
 icons.files += wetter.com_icons_wind/*.png

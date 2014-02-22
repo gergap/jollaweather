@@ -36,9 +36,15 @@ import "wettercom.js" as Wetter
 Page {
     id: page
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-    SilicaFlickable {
+    SilicaListView {
+        id: view
         anchors.fill: parent
+        model: xmlModel
+        header: PageHeader {
+            title: "Nürnberg"
+        }
+        delegate: WeatherDelegate {}
+        spacing: 5
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
@@ -49,65 +55,9 @@ Page {
             MenuItem {
                 text: "Refresh"
                 onClicked: {
+                    console.log(Wetter.weatherUrl("DE0007131"));
                     xmlModel.source = Wetter.weatherUrl("DE0007131");
                 }
-            }
-        }
-
-        // Tell SilicaFlickable the height of its content.
-        contentHeight: column.height
-
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
-        Column {
-            id: column
-
-            width: page.width
-            spacing: Theme.paddingLarge
-            PageHeader {
-                title: "Weather forecast"
-            }
-            Label {
-                x: Theme.paddingLarge
-                text: "Nuremberg"
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
-            }
-            Label {
-                id: one
-                x: Theme.paddingLarge
-            }
-            Label {
-                id: two
-                x: Theme.paddingLarge
-            }
-            Label {
-                id: three
-                x: Theme.paddingLarge
-            }
-            Label {
-                id: four
-                x: Theme.paddingLarge
-            }
-            Label {
-                id: five
-                x: Theme.paddingLarge
-            }
-            Label {
-                id: six
-                x: Theme.paddingLarge
-            }
-            Label {
-                id: seven
-                x: Theme.paddingLarge
-            }
-            Image {
-                id: imgWeather
-                source: "/usr/share/JollaWeather/icons/d_0_L.png"
-                smooth: true
-            }
-            Image {
-                id: imgWind
             }
         }
 
@@ -126,42 +76,30 @@ Page {
     d Lokale Zeit (Unix timestamp)
     p Gültigkeitszeitraum der Prognose
     w Code für den Wetterzustand
+    w_txt Wetterzustand als Text
     tn min temp celsius
     tx max temp celsius
     pc niederschlagswahrscheinlichkeit
     wd windrichtung in grad
+    wd_txt windricht als text ("SW", etc.)
     ws windgeschw in km/h
     */
     XmlListModel {
         id: xmlModel
         query: "/city/forecast/date"
+        XmlRole { name: "date";  query: "@value/string()" }
+        XmlRole { name: "d";     query: "d/string()" }
+        XmlRole { name: "p";     query: "p/string()" }
         XmlRole { name: "w";     query: "w/string()" }
+        XmlRole { name: "w_txt"; query: "w_txt/string()" }
         XmlRole { name: "tn";    query: "tn/string()" }
         XmlRole { name: "tx";    query: "tx/string()" }
-        XmlRole { name: "d";     query: "d/string()" }
-        XmlRole { name: "dn";    query: "dn/string()" }
-        XmlRole { name: "p";     query: "p/string()" }
         XmlRole { name: "pc";    query: "pc/string()" }
-        XmlRole { name: "w_txt"; query: "w_txt/string()" }
+        XmlRole { name: "wd";    query: "wd/string()" }
         XmlRole { name: "wd_txt"; query: "wd_txt/string()" }
+        XmlRole { name: "ws";    query: "ws/string()" }
         onSourceChanged: {
             console.log("new source");
-        }
-        onStatusChanged: {
-            if (status === XmlListModel.Ready) {
-                if (xmlModel.count > 0) {
-                    one.text   = "Min: "+xmlModel.get(0).tn+"°C";
-                    two.text   = "Max: "+xmlModel.get(0).tx+"°C";
-                    three.text = "Niederschlag: "+xmlModel.get(0).pc+"%";
-                    four.text  = "Wind: "+xmlModel.get(0).ws+"km/h";
-                    five.text  = xmlModel.get(0).p;
-                    six.text   = xmlModel.get(0).w_txt;
-                    seven.text   = xmlModel.get(0).wd_txt;
-
-                    imgWeather.source = "/usr/share/JollaWeather/icons/d_"+xmlModel.get(0).w+"_L.png";
-                    imgWind.source = "/usr/share/JollaWeather/icons/"+xmlModel.get(0).wd_txt+".png";
-                }
-            }
         }
     }
 }
