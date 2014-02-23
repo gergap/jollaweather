@@ -34,6 +34,9 @@
 
 #include <sailfishapp.h>
 #include "weathersettings.h"
+#include <QGuiApplication>
+#include <QQuickView>
+#include <QQmlEngine>
 #include <QQmlContext>
 
 int main(int argc, char *argv[])
