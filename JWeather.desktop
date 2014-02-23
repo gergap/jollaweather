@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 X-Nemo-Application-Type=silica-qt5
-Name=JollaWeather
-Icon=JollaWeather
-Exec=JollaWeather
+Name=JWeather
+Icon=JWeather
+Exec=JWeather
 

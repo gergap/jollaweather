@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     // To display the view, call "show()" (will show fullscreen on device).
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
-    QGuiApplication::setApplicationName("JollaWeather");
+    QGuiApplication::setApplicationName("JWeather");
     QGuiApplication::setOrganizationName("Gerhard Gappmeier");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());

@@ -39,12 +39,12 @@ CoverBackground {
 
     onWeatherConditionChanged: {
         console.log("Changing cover image");
-        coverImage.source = "/usr/share/JollaWeather/icons/d_"+cover.weatherCondition+"_L.png";
+        coverImage.source = "/usr/share/JWeather/icons/d_"+cover.weatherCondition+"_L.png";
     }
 
     Image {
         id: coverImage
-        source: "/usr/share/JollaWeather/icons/d_0_L.png";
+        source: "/usr/share/JWeather/icons/d_0_L.png";
         anchors.centerIn: parent
     }
 

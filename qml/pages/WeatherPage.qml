@@ -126,7 +126,7 @@ Page {
         anchors.bottomMargin: Theme.paddingMedium
         anchors.right: parent.right
         anchors.rightMargin: Theme.paddingMedium
-        source: "/usr/share/JollaWeather/icons/wettercom_92x18.png"
+        source: "/usr/share/JWeather/icons/wettercom_92x18.png"
 
         MouseArea {
             anchors.fill: parent

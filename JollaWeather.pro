@@ -6,7 +6,7 @@
 #         - desktop icon filename must be changed
 #         - desktop filename must be changed
 #         - icon definition filename in desktop file must be changed
-TARGET = JollaWeather
+TARGET = JWeather
 
 CONFIG += sailfishapp
 #CONFIG+=qml_debug
@@ -17,9 +17,9 @@ SOURCES += src/JollaWeather.cpp \
 OTHER_FILES += qml/JollaWeather.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    rpm/JollaWeather.spec \
-    rpm/JollaWeather.yaml \
-    JollaWeather.desktop \
+    rpm/JWeather.spec \
+    rpm/JWeather.yaml \
+    JWeather.desktop \
     qml/pages/SettingsPage.qml \
     qml/pages/LocationDialog.qml \
     qml/pages/wettercom.js \
@@ -29,10 +29,10 @@ OTHER_FILES += qml/JollaWeather.qml \
 icons.files = wetter.com_icons/*.png
 icons.files += wetter.com_icons_wind/*.png
 icons.files += wettercom_92x18.png
-icons.path = $$DEPLOYMENT_PATH/usr/share/JollaWeather/icons
+icons.path = $$DEPLOYMENT_PATH/usr/share/JWeather/icons
 INSTALLS += icons
 
-TRANSLATIONS = jollaweather_de.ts
+TRANSLATIONS = jweather_de.ts
 
 #RESOURCES += jollaweather.qrc
 
