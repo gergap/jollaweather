@@ -52,7 +52,7 @@ Dialog {
             spacing: Theme.paddingLarge
             DialogHeader {
                 title: qsTr("Settings")
-                //acceptText: "Accept"
+                acceptText: qsTr("Accept")
             }
             Label {
                 x: Theme.paddingLarge

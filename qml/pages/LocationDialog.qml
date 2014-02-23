@@ -16,7 +16,7 @@ Dialog {
         model: xmlModel
         header: DialogHeader {
             title: qsTr("Choose Location")
-            //acceptText: "Accept"
+            acceptText: qsTr("Accept")
         }
         delegate: BackgroundItem {
             id: background
