@@ -31,11 +31,18 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
+import "cover"
 
 ApplicationWindow
 {
-    initialPage: Component { WeatherPage { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    initialPage: WeatherPage { id: wp }
+    cover: Component {
+        CoverPage {
+            weatherCondition: wp.weatherCondition
+            weatherConditionText: wp.weatherConditionText
+            temperature: wp.temperature
+        }
+    }
 }
 
 

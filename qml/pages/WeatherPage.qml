@@ -35,6 +35,9 @@ import "wettercom.js" as Wetter
 
 Page {
     id: page
+    property string weatherCondition: "0"
+    property string weatherConditionText: ""
+    property string temperature: "0"
 
     SilicaListView {
         id: view
@@ -105,6 +108,16 @@ Page {
         XmlRole { name: "ws";    query: "ws/string()" }
         onSourceChanged: {
             console.log("new source");
+        }
+        onStatusChanged: {
+            if (status === XmlListModel.Ready) {
+                if (xmlModel.count > 0) {
+                    console.log("weatherCondition: "+xmlModel.get(0).w);
+                    page.weatherCondition = xmlModel.get(0).w;
+                    page.weatherConditionText = xmlModel.get(0).w_txt;
+                    page.temperature = xmlModel.get(0).tx;
+                }
+            }
         }
     }
 

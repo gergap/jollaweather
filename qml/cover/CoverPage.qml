@@ -32,19 +32,38 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-/*    Label {
-        id: label
-        anchors.centerIn: parent
-        text: "Weather"
-    }
-*/
-    Image {
-        source: "/usr/share/JollaWeather/icons/d_0_L.png"
-        anchors.centerIn: parent
+    id: cover
+    property string weatherCondition: "0"
+    property string weatherConditionText: ""
+    property string temperature: "-"
 
-        onStatusChanged: {
-            console.log("status:"+status);
-        }
+    onWeatherConditionChanged: {
+        console.log("Changing cover image");
+        coverImage.source = "/usr/share/JollaWeather/icons/d_"+cover.weatherCondition+"_L.png";
+    }
+
+    Image {
+        id: coverImage
+        source: "/usr/share/JollaWeather/icons/d_0_L.png";
+        anchors.centerIn: parent
+    }
+
+    Label {
+        id: labelTemp
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: Theme.paddingLarge
+        font.pixelSize: Theme.fontSizeLarge
+        text: cover.temperature + " °C"
+    }
+
+    Label {
+        id: labelCondition
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Theme.paddingLarge
+        font.pixelSize: Theme.fontSizeMedium
+        text: cover.weatherConditionText
     }
 
     CoverActionList {
