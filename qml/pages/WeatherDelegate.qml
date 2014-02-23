@@ -6,7 +6,6 @@ Component {
     Rectangle {
         height: Theme.itemSizeExtraLarge*2
         width: ListView.view.width
-        //color: "#0070a8"
         radius: 5
         gradient: Gradient {
             GradientStop { position: 0.0; color: "#80ffffff" }
@@ -45,7 +44,7 @@ Component {
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingLarge
             color: "#ffffff"
-            text: "Min: " + tn + "°C"
+            text: qsTr("Min: ") + tn + "°C"
             style: Text.Raised
             font.pixelSize: Theme.fontSizeLarge
         }
@@ -56,7 +55,7 @@ Component {
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingLarge
             color: "#ffffff"
-            text: "Max: " + tx + "°C"
+            text: qsTr("Max: ") + tx + "°C"
             style: Text.Raised
             font.pixelSize: Theme.fontSizeExtraLarge
         }
@@ -64,7 +63,6 @@ Component {
         Text {
             id: txtWind
             anchors.top: txtTempMax.bottom
-            //anchors.topMargin: Theme.paddingMedium
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingLarge
             color: "#ffffff"
@@ -76,7 +74,6 @@ Component {
         Text {
             id: txtWindSpeed
             anchors.top: txtWind.bottom
-            //anchors.topMargin: Theme.paddingMedium
             anchors.right: parent.right
             anchors.rightMargin: Theme.paddingLarge
             color: "#ffffff"

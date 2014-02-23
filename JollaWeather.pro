@@ -11,7 +11,8 @@ TARGET = JollaWeather
 CONFIG += sailfishapp
 #CONFIG+=qml_debug
 
-SOURCES += src/JollaWeather.cpp
+SOURCES += src/JollaWeather.cpp \
+    src/weathersettings.cpp
 
 OTHER_FILES += qml/JollaWeather.qml \
     qml/cover/CoverPage.qml \
@@ -30,5 +31,10 @@ icons.files += wetter.com_icons_wind/*.png
 icons.path = $$DEPLOYMENT_PATH/usr/share/JollaWeather/icons
 INSTALLS += icons
 
+TRANSLATIONS = jollaweather_de.ts
+
 #RESOURCES += jollaweather.qrc
+
+HEADERS += \
+    src/weathersettings.h
 

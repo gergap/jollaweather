@@ -33,6 +33,8 @@
 #endif
 
 #include <sailfishapp.h>
+#include "weathersettings.h"
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -50,6 +52,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("Gerhard Gappmeier");
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
+    view->engine()->rootContext()->setContextProperty("weatherSettings", new WeatherSettings);
 
     view->setSource(SailfishApp::pathTo("qml/JollaWeather.qml"));
     view->show();

@@ -15,8 +15,8 @@ Dialog {
         anchors.fill: parent
         model: xmlModel
         header: DialogHeader {
-            title: "Choose Location"
-            acceptText: "Accept"
+            title: qsTr("Choose Location")
+            //acceptText: "Accept"
         }
         delegate: BackgroundItem {
             id: background

@@ -48,29 +48,29 @@ Dialog {
             width: page.width
             spacing: Theme.paddingLarge
             DialogHeader {
-                title: "Settings"
-                acceptText: "Accept"
+                title: qsTr("Settings")
+                //acceptText: "Accept"
             }
             Label {
                 x: Theme.paddingLarge
-                text: "Weather Station"
+                text: qsTr("Weather Station")
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraLarge
             }
             TextField {
                 id: location
                 width: 480
-                placeholderText: "Enter Town / Location"
-                label: "Location"
+                placeholderText: qsTr("Enter Town / Location")
+                label: qsTr("Location")
             }
             Button {
-               text: "Search"
+                text: qsTr("Search")
                onClicked: {
                    var dialog = pageStack.push(Qt.resolvedUrl("LocationDialog.qml"), {"search": location.text});
                    dialog.search = location.text;
                    dialog.accepted.connect(function() {
-                       location.text = dialog.location;
-                       location.text = dialog.city_code;
+                       weatherSettings.cityCode = dialog.city_code;
+                       weatherSettings.location = dialog.location;
                    })
                }
 
@@ -81,7 +81,7 @@ Dialog {
             }
             ComboBox {
                 width: 480
-                label: "Update interval"
+                label: qsTr("Update interval")
 
                 menu: ContextMenu {
                     MenuItem { text: "1 min" }
@@ -97,23 +97,27 @@ Dialog {
             }
             Label {
                 x: Theme.paddingLarge
-                text: "Units"
+                text: qsTr("Units")
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraLarge
             }
             ComboBox {
                 width: 480
-                label: "Temperature"
+                label: qsTr("Temperature")
 
                 menu: ContextMenu {
                     MenuItem { text: "Celsius °C" }
                     MenuItem { text: "Fahrenheit °F" }
                     MenuItem { text: "Kelvin K" }
                 }
+
+                onValueChanged: {
+                    weatherSettings.tempUnit = value;
+                }
             }
             ComboBox {
                 width: 480
-                label: "Pressure"
+                label: qsTr("Pressure")
 
                 menu: ContextMenu {
                     MenuItem { text: "Hectopascales hPa" }
@@ -121,10 +125,14 @@ Dialog {
                     MenuItem { text: "Millibars mbar" }
                     MenuItem { text: "Inches for Mecury inHg" }
                 }
+
+                onValueChanged: {
+                    weatherSettings.pressureUnit = value;
+                }
             }
             ComboBox {
                 width: 480
-                label: "Wind speed"
+                label: qsTr("Wind speed")
 
                 menu: ContextMenu {
                     MenuItem { text: "Kilometers per Hour km/h" }
@@ -133,18 +141,34 @@ Dialog {
                     MenuItem { text: "Knotes kt" }
                     MenuItem { text: "Beaufort scale bft" }
                 }
+
+                onValueChanged: {
+                    weatherSettings.windSpeedUnit = value;
+                }
             }
             ComboBox {
                 width: 480
-                label: "Visibility"
+                label: qsTr("Visibility")
 
                 menu: ContextMenu {
                     MenuItem { text: "Kilometers" }
                     MenuItem { text: "Miles" }
                 }
+
+                onValueChanged: {
+                    weatherSettings.visibilityUnit = value;
+                }
             }
         }
     }
+
+    onDone: {
+        if (result === DialogResult.Accepted) {
+            console.log("Saving settings");
+            weatherSettings.save();
+        }
+    }
+
 }
 
 

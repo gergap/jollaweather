@@ -41,10 +41,15 @@ Page {
         anchors.fill: parent
         model: xmlModel
         header: PageHeader {
-            title: "Nürnberg"
+            title: weatherSettings.location;
         }
         delegate: WeatherDelegate {}
         spacing: 5
+
+        Component.onCompleted: {
+            console.log(Wetter.weatherUrl(weatherSettings.cityCode));
+            xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
+        }
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
@@ -55,8 +60,8 @@ Page {
             MenuItem {
                 text: "Refresh"
                 onClicked: {
-                    console.log(Wetter.weatherUrl("DE0007131"));
-                    xmlModel.source = Wetter.weatherUrl("DE0007131");
+                    console.log(Wetter.weatherUrl(weatherSettings.cityCode));
+                    xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
                 }
             }
         }
