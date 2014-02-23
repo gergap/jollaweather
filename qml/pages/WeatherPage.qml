@@ -41,6 +41,9 @@ Page {
     property string temperature: "0"
 
     onCityCodeChanged: {
+        console.debug("onCityCodeChanged");
+        console.debug("page.cityCode: "+page.cityCode);
+        console.debug("weatherSettings.cityCode: "+weatherSettings.cityCode);
         console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
         xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
     }
@@ -55,11 +58,6 @@ Page {
         delegate: WeatherDelegate {}
         spacing: 5
 
-        Component.onCompleted: {
-            console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
-            xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
-        }
-
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
@@ -69,6 +67,7 @@ Page {
             MenuItem {
                 text: "Refresh"
                 onClicked: {
+                    console.debug("refresh clicked");
                     console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
                     xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
                 }
@@ -150,6 +149,7 @@ Page {
         triggeredOnStart: true
 
         onTriggered: {
+            console.debug("timer");
             console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
             xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
         }

@@ -27,7 +27,6 @@ function plzSearchUrl(search) {
 
 function weatherUrl(city_code) {
     var input = project+apiKey+city_code;
-    //var input = [project, apiKey, city_code].join();
     var md5 = Qt.md5(input);
     var url = "http://api.wetter.com/forecast/weather/city/"+city_code+"/project/"+project+"/cs/"+md5;
     return url;

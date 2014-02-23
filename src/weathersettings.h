@@ -9,10 +9,10 @@ class WeatherSettings : public QObject
     Q_PROPERTY(int updateInverval MEMBER m_updateInterval NOTIFY updateIntervalChanged)
     Q_PROPERTY(QString location MEMBER m_location NOTIFY locationChanged)
     Q_PROPERTY(QString cityCode MEMBER m_citycode NOTIFY cityCodeChanged)
-    Q_PROPERTY(QString tempUnit MEMBER m_citycode NOTIFY tempUnitChanged)
-    Q_PROPERTY(QString pressureUnit MEMBER m_citycode NOTIFY pressureUnitChanged)
-    Q_PROPERTY(QString windSpeedUnit MEMBER m_citycode NOTIFY windSpeedUnitChanged)
-    Q_PROPERTY(QString visibilityUnit MEMBER m_citycode NOTIFY visibilityUnitChanged)
+    Q_PROPERTY(QString tempUnit MEMBER m_tempUnit NOTIFY tempUnitChanged)
+    Q_PROPERTY(QString pressureUnit MEMBER m_pressureUnit NOTIFY pressureUnitChanged)
+    Q_PROPERTY(QString windSpeedUnit MEMBER m_windSpeedUnit NOTIFY windSpeedUnitChanged)
+    Q_PROPERTY(QString visibilityUnit MEMBER m_visibilityUnit NOTIFY visibilityUnitChanged)
 public:
     explicit WeatherSettings(QObject *parent = 0);
 

@@ -34,8 +34,8 @@ import Sailfish.Silica 1.0
 
 Dialog {
     id: page
-    property string cityCode: weatherSettings.cityCode
-    property string location: weatherSettings.location
+    property string cityCode: ""
+    property string location: ""
     property int interval: weatherSettings.updateInverval
 
     onIntervalChanged: {
@@ -96,9 +96,9 @@ Dialog {
                    var dialog = pageStack.push(Qt.resolvedUrl("LocationDialog.qml"), {"search": location.text});
                    dialog.search = location.text;
                    dialog.accepted.connect(function() {
-                       location.text = dialog.location;
                        page.cityCode = dialog.cityCode;
                        page.location = dialog.location;
+                       location.text = dialog.location;
                    })
                }
 
@@ -126,7 +126,7 @@ Dialog {
             }
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Units")
+                text: qsTr("Units (not yet implemented)")
                 color: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeExtraLarge
             }
@@ -213,8 +213,10 @@ Dialog {
                 weatherSettings.updateInverval = 24*60;
                 break;
             }
-            weatherSettings.cityCode = page.cityCode;
-            weatherSettings.location = page.location;
+            if (page.cityCode != "")
+                weatherSettings.cityCode = page.cityCode;
+            if (page.location != "")
+                weatherSettings.location = page.location;
             weatherSettings.tempUnit = cmbTemperatureUnit.value;
             weatherSettings.pressureUnit = cmbPressureUnit.value;
             weatherSettings.windSpeedUnit = cmbWindSpeedUnit.value;
