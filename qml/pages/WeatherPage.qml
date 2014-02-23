@@ -41,7 +41,7 @@ Page {
     property string temperature: "0"
 
     onCityCodeChanged: {
-        console.log(Wetter.weatherUrl(weatherSettings.cityCode));
+        console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
         xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
     }
 
@@ -56,7 +56,7 @@ Page {
         spacing: 5
 
         Component.onCompleted: {
-            console.log(Wetter.weatherUrl(weatherSettings.cityCode));
+            console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
             xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
         }
 
@@ -69,7 +69,7 @@ Page {
             MenuItem {
                 text: "Refresh"
                 onClicked: {
-                    console.log(Wetter.weatherUrl(weatherSettings.cityCode));
+                    console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
                     xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
                 }
             }
@@ -113,12 +113,12 @@ Page {
         XmlRole { name: "wd_txt"; query: "wd_txt/string()" }
         XmlRole { name: "ws";    query: "ws/string()" }
         onSourceChanged: {
-            console.log("new source");
+            console.debug("new source");
         }
         onStatusChanged: {
             if (status === XmlListModel.Ready) {
                 if (xmlModel.count > 0) {
-                    console.log("weatherCondition: "+xmlModel.get(0).w);
+                    console.debug("weatherCondition: "+xmlModel.get(0).w);
                     page.weatherCondition = xmlModel.get(0).w;
                     page.weatherConditionText = xmlModel.get(0).w_txt;
                     page.temperature = xmlModel.get(0).tx;

@@ -22,7 +22,7 @@ Dialog {
             id: background
             property bool selected: page.cityCode === model.city_code
             onClicked: {
-                console.log("page.location="+model.name);
+                console.debug("page.location="+model.name);
                 page.location = model.name;
                 page.cityCode = model.city_code;
             }
@@ -70,7 +70,7 @@ Dialog {
         XmlRole { name: "name"; query: "name/string()" }
         XmlRole { name: "quarter"; query: "quarter/string()" }
         onSourceChanged: {
-            console.log("new source");
+            console.debug("new source");
         }
     }
 
