@@ -35,9 +35,15 @@ import "wettercom.js" as Wetter
 
 Page {
     id: page
+    property string cityCode: weatherSettings.cityCode
     property string weatherCondition: "0"
     property string weatherConditionText: ""
     property string temperature: "0"
+
+    onCityCodeChanged: {
+        console.log(Wetter.weatherUrl(weatherSettings.cityCode));
+        xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
+    }
 
     SilicaListView {
         id: view

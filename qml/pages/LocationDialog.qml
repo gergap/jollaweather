@@ -6,9 +6,9 @@ import "wettercom.js" as Wetter
 Dialog {
     id: page
     property string location
-    property string city_code
+    property string cityCode
     property string search
-    canAccept: city_code != ""
+    canAccept: cityCode != ""
 
     SilicaListView {
         id: view
@@ -20,10 +20,11 @@ Dialog {
         }
         delegate: BackgroundItem {
             id: background
-            property bool selected: page.city_code === model.city_code
+            property bool selected: page.cityCode === model.city_code
             onClicked: {
+                console.log("page.location="+model.name);
                 page.location = model.name;
-                page.city_code = model.city_code;
+                page.cityCode = model.city_code;
             }
             Column {
                 anchors.left: parent.left; anchors.leftMargin: Theme.paddingMedium
@@ -74,11 +75,5 @@ Dialog {
 
     onSearchChanged: {
         xmlModel.source = Wetter.mixedSearchUrl(search);
-    }
-
-    onDone: {
-        if (result === DialogResult.Accepted) {
-            name = view.currentItem.city_code;
-        }
     }
 }

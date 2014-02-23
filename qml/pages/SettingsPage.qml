@@ -34,6 +34,9 @@ import Sailfish.Silica 1.0
 
 Dialog {
     id: page
+    property string cityCode: ""
+    property string location: ""
+
     SilicaFlickable {
         anchors.fill: parent
 
@@ -69,8 +72,9 @@ Dialog {
                    var dialog = pageStack.push(Qt.resolvedUrl("LocationDialog.qml"), {"search": location.text});
                    dialog.search = location.text;
                    dialog.accepted.connect(function() {
-                       weatherSettings.cityCode = dialog.city_code;
-                       weatherSettings.location = dialog.location;
+                       location.text = dialog.location;
+                       page.cityCode = dialog.cityCode;
+                       page.location = dialog.location;
                    })
                }
 
@@ -164,7 +168,9 @@ Dialog {
 
     onDone: {
         if (result === DialogResult.Accepted) {
-            console.log("Saving settings");
+            console.log("Saving settings: "+page.location);
+            weatherSettings.cityCode = page.cityCode;
+            weatherSettings.location = page.location;
             weatherSettings.save();
         }
     }
