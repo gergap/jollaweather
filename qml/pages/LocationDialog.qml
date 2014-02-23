@@ -59,6 +59,7 @@ Dialog {
                 FadeAnimation {}
             }
         }
+        VerticalScrollDecorator {}
     }
 
     XmlListModel {
