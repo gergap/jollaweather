@@ -141,6 +141,19 @@ Page {
             }
         }
     }
+
+    Timer {
+        id: timer
+        // updateInterval [min], Timer.interval [ms]
+        interval: weatherSettings.updateInverval * 60000
+        repeat: true
+        triggeredOnStart: true
+
+        onTriggered: {
+            console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
+            xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
+        }
+    }
 }
 
 
