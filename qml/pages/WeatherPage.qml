@@ -107,6 +107,21 @@ Page {
             console.log("new source");
         }
     }
+
+    Image {
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Theme.paddingMedium
+        anchors.right: parent.right
+        anchors.rightMargin: Theme.paddingMedium
+        source: "/usr/share/JollaWeather/icons/wettercom_92x18.png"
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                Qt.openUrlExternally("http://www.wetter.com");
+            }
+        }
+    }
 }
 
 

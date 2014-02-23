@@ -28,6 +28,7 @@ OTHER_FILES += qml/JollaWeather.qml \
 
 icons.files = wetter.com_icons/*.png
 icons.files += wetter.com_icons_wind/*.png
+icons.files += wettercom_92x18.png
 icons.path = $$DEPLOYMENT_PATH/usr/share/JollaWeather/icons
 INSTALLS += icons
 
