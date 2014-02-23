@@ -34,8 +34,32 @@ import Sailfish.Silica 1.0
 
 Dialog {
     id: page
-    property string cityCode: ""
-    property string location: ""
+    property string cityCode: weatherSettings.cityCode
+    property string location: weatherSettings.location
+    property int interval: weatherSettings.updateInverval
+
+    onIntervalChanged: {
+        switch (weatherSettings.updateInverval) {
+        case 1:
+            cmbUpdateInterval.currentIndex = 0; break;
+        case 5:
+            cmbUpdateInterval.currentIndex = 1; break;
+        case 10:
+            cmbUpdateInterval.currentIndex = 2; break;
+        case 15:
+            cmbUpdateInterval.currentIndex = 3; break;
+        case 30:
+            cmbUpdateInterval.currentIndex = 4; break;
+        case 60:
+            cmbUpdateInterval.currentIndex = 5; break;
+        case 6*60:
+            cmbUpdateInterval.currentIndex = 6; break;
+        case 12*60:
+            cmbUpdateInterval.currentIndex = 7; break;
+        case 24*60:
+            cmbUpdateInterval.currentIndex = 8; break;
+        }
+    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -62,13 +86,13 @@ Dialog {
             }
             TextField {
                 id: location
-                width: 480
+                width: page.width
                 placeholderText: qsTr("Enter Town / Location")
                 label: qsTr("Location")
             }
             Button {
                 text: qsTr("Search")
-               onClicked: {
+                onClicked: {
                    var dialog = pageStack.push(Qt.resolvedUrl("LocationDialog.qml"), {"search": location.text});
                    dialog.search = location.text;
                    dialog.accepted.connect(function() {
@@ -84,10 +108,11 @@ Dialog {
                }
             }
             ComboBox {
-                width: 480
+                id: cmbUpdateInterval
+                width: page.width
                 label: qsTr("Update interval")
-
                 menu: ContextMenu {
+                    id: menu
                     MenuItem { text: "1 min" }
                     MenuItem { text: "5 min" }
                     MenuItem { text: "10 min" }
@@ -106,7 +131,8 @@ Dialog {
                 font.pixelSize: Theme.fontSizeExtraLarge
             }
             ComboBox {
-                width: 480
+                id: cmbTemperatureUnit
+                width: page.width
                 label: qsTr("Temperature")
 
                 menu: ContextMenu {
@@ -115,12 +141,10 @@ Dialog {
                     MenuItem { text: "Kelvin K" }
                 }
 
-                onValueChanged: {
-                    weatherSettings.tempUnit = value;
-                }
             }
             ComboBox {
-                width: 480
+                id: cmbPressureUnit
+                width: page.width
                 label: qsTr("Pressure")
 
                 menu: ContextMenu {
@@ -130,12 +154,10 @@ Dialog {
                     MenuItem { text: "Inches for Mecury inHg" }
                 }
 
-                onValueChanged: {
-                    weatherSettings.pressureUnit = value;
-                }
             }
             ComboBox {
-                width: 480
+                id: cmbWindSpeedUnit
+                width: page.width
                 label: qsTr("Wind speed")
 
                 menu: ContextMenu {
@@ -145,22 +167,15 @@ Dialog {
                     MenuItem { text: "Knotes kt" }
                     MenuItem { text: "Beaufort scale bft" }
                 }
-
-                onValueChanged: {
-                    weatherSettings.windSpeedUnit = value;
-                }
             }
             ComboBox {
-                width: 480
+                id: cmbVisibilityUnit
+                width: page.width
                 label: qsTr("Visibility")
 
                 menu: ContextMenu {
                     MenuItem { text: "Kilometers" }
                     MenuItem { text: "Miles" }
-                }
-
-                onValueChanged: {
-                    weatherSettings.visibilityUnit = value;
                 }
             }
         }
@@ -168,9 +183,42 @@ Dialog {
 
     onDone: {
         if (result === DialogResult.Accepted) {
-            console.log("Saving settings: "+page.location);
+            console.debug("Saving settings: "+page.location);
+            switch (cmbUpdateInterval.value) {
+            case "1 min":
+                weatherSettings.updateInverval = 1;
+                break;
+            case "5 min":
+                weatherSettings.updateInverval = 5;
+                break;
+            case "10 min":
+                weatherSettings.updateInverval = 10;
+                break;
+            case "15 min":
+                weatherSettings.updateInverval = 15;
+                break;
+            case "30 min":
+                weatherSettings.updateInverval = 30;
+                break;
+            case "60 min":
+                weatherSettings.updateInverval = 60;
+                break;
+            case "6 h":
+                weatherSettings.updateInverval = 6*60;
+                break;
+            case "12 h":
+                weatherSettings.updateInverval = 12*60;
+                break;
+            case "24 h":
+                weatherSettings.updateInverval = 24*60;
+                break;
+            }
             weatherSettings.cityCode = page.cityCode;
             weatherSettings.location = page.location;
+            weatherSettings.tempUnit = cmbTemperatureUnit.value;
+            weatherSettings.pressureUnit = cmbPressureUnit.value;
+            weatherSettings.windSpeedUnit = cmbWindSpeedUnit.value;
+            weatherSettings.visibilityUnit = cmbVisibilityUnit.value;
             weatherSettings.save();
         }
     }
