@@ -1,6 +1,6 @@
 Name: JWeather
 Summary: Weather Forecast
-Version: 0.1
+Version: 0.0.1
 Release: 1
 Group: Qt/Qt
 URL: http://example.org/
@@ -8,7 +8,7 @@ License: GPL
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |-
-  Jolla Weather shows you the current weather and a forecast for the next few days. The data is provided by www.wetter.com.
+  JWeather (Jolla Weather) shows you the current weather and a forecast for the next few days. The data is provided by www.wetter.com.
 Configure: none
 Builder: qtc5
 PkgConfigBR:
