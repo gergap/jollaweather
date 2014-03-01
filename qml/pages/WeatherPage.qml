@@ -48,18 +48,37 @@ Page {
         xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
     }
 
+    Text {
+        id: info
+        anchors.fill: parent
+        text: qsTr("Pull down and select Settings to configure your location")
+        color: Theme.secondaryHighlightColor
+        font.pixelSize: Theme.fontSizeExtraLarge
+        wrapMode: Text.WordWrap
+        visible: cityCode === "";
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+    }
+
     SilicaListView {
         id: view
         anchors.fill: parent
         model: xmlModel
         header: PageHeader {
-            title: weatherSettings.location+"("+weatherSettings.cityCode+")";
+            title: weatherSettings.location;
+            /*title: weatherSettings.location+"("+weatherSettings.cityCode+")";*/
         }
         delegate: WeatherDelegate {}
         spacing: 5
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
+            /*MenuItem {
+                text: "Clear Settings"
+                onClicked: {
+                    weatherSettings.clear();
+                }
+            }*/
             MenuItem {
                 text: "Settings"
                 onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
@@ -68,8 +87,7 @@ Page {
                 text: "Refresh"
                 onClicked: {
                     console.debug("refresh clicked");
-                    console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
-                    xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
+                    xmlModel.reload();
                 }
             }
         }
@@ -150,8 +168,7 @@ Page {
 
         onTriggered: {
             console.debug("timer");
-            console.debug(Wetter.weatherUrl(weatherSettings.cityCode));
-            xmlModel.source = Wetter.weatherUrl(weatherSettings.cityCode);
+            xmlModel.reload();
         }
     }
 }
