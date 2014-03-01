@@ -20,14 +20,9 @@ Requires:
 - qt5-qtdeclarative-import-xmllistmodel
 - sailfishsilica-qt5 >= 0.10.9
 Files:
-- /usr/share/harbour-jweather/icons
-- /usr/share/icons/hicolor/86x86/apps
-- /usr/share/applications
-- /usr/share/harbour-jweather
-- /usr/share/harbour-jweather/icons/*.png
-- /usr/bin
 - '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
 - '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/%{name}/icons/*.png'
 - '%{_datadir}/%{name}/qml'
 - '%{_bindir}'
 PkgBR: []
