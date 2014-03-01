@@ -72,9 +72,13 @@ Dialog {
         onSourceChanged: {
             console.debug("new source");
         }
+        onStatusChanged: {
+            console.debug(status);
+        }
     }
 
     onSearchChanged: {
+        console.debug(Wetter.mixedSearchUrl(search));
         xmlModel.source = Wetter.mixedSearchUrl(search);
     }
 }

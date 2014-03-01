@@ -1,4 +1,4 @@
-Name: JWeather
+Name: harbour-jweather
 Summary: Weather Forecast
 Version: 0.0.1
 Release: 1
@@ -12,22 +12,22 @@ Description: |-
 Configure: none
 Builder: qtc5
 PkgConfigBR:
-- Qt5Quick
-- Qt5Qml
-- Qt5Core
 - sailfishapp >= 0.0.10
+- Qt5Core
+- Qt5Qml
+- Qt5Quick
 Requires:
-- sailfishsilica-qt5 >= 0.10.9
 - qt5-qtdeclarative-import-xmllistmodel
+- sailfishsilica-qt5 >= 0.10.9
 Files:
-- '%{_bindir}'
-- '%{_datadir}/%{name}/qml'
-- '%{_datadir}/applications/%{name}.desktop'
-- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
-- /usr/bin
-- /usr/share/JWeather/icons/*.png
-- /usr/share/JWeather
-- /usr/share/applications
+- /usr/share/harbour-jweather/icons
 - /usr/share/icons/hicolor/86x86/apps
-- /usr/share/JWeather/icons
+- /usr/share/applications
+- /usr/share/harbour-jweather
+- /usr/share/harbour-jweather/icons/*.png
+- /usr/bin
+- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
+- '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/%{name}/qml'
+- '%{_bindir}'
 PkgBR: []

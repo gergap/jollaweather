@@ -53,7 +53,7 @@ Page {
         anchors.fill: parent
         model: xmlModel
         header: PageHeader {
-            title: weatherSettings.location;
+            title: weatherSettings.location+"("+weatherSettings.cityCode+")";
         }
         delegate: WeatherDelegate {}
         spacing: 5
@@ -131,7 +131,7 @@ Page {
         anchors.bottomMargin: Theme.paddingMedium
         anchors.right: parent.right
         anchors.rightMargin: Theme.paddingMedium
-        source: "/usr/share/JWeather/icons/wettercom_92x18.png"
+        source: Wetter.icondir+"wettercom_92x18.png"
 
         MouseArea {
             anchors.fill: parent

@@ -30,6 +30,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../pages/wettercom.js" as Wetter
 
 CoverBackground {
     id: cover
@@ -39,12 +40,12 @@ CoverBackground {
 
     onWeatherConditionChanged: {
         console.log("Changing cover image");
-        coverImage.source = "/usr/share/JWeather/icons/d_"+cover.weatherCondition+"_L.png";
+        coverImage.source = Wetter.icondir+"d_"+cover.weatherCondition+"_L.png";
     }
 
     Image {
         id: coverImage
-        source: "/usr/share/JWeather/icons/d_0_L.png";
+        source: Wetter.icondir+"d_0_L.png";
         anchors.centerIn: parent
     }
 

@@ -1,5 +1,17 @@
 #include "weathersettings.h"
 #include <QSettings>
+#include <QCoreApplication>
+#include <QStandardPaths>
+#include <QDir>
+
+
+/** example from https://github.com/sailfish-sdk/xdg-helper/blob/master/README.qt5
+ *
+ * QString config_dir = QDir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation))
+ *       .filePath(QCoreApplication::applicationName());
+ * QString data_dir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+ * QString cache_dir = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+ */
 
 WeatherSettings::WeatherSettings(QObject *parent) :
     QObject(parent)
@@ -10,12 +22,14 @@ WeatherSettings::WeatherSettings(QObject *parent) :
     m_windSpeedUnit = "km/h";
     m_visibilityUnit = "km";
 
+    m_config_dir = QDir(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation))
+            .filePath(QCoreApplication::applicationName());
     load();
 }
 
 void WeatherSettings::load()
 {
-    QSettings s;
+    QSettings s(m_config_dir, QSettings::IniFormat);
 
     m_updateInterval = s.value("updateInterval", m_updateInterval).toInt();
     m_location = s.value("location", m_location).toString();
@@ -36,7 +50,7 @@ void WeatherSettings::load()
 
 void WeatherSettings::save()
 {
-    QSettings s;
+    QSettings s(m_config_dir, QSettings::IniFormat);
 
     s.setValue("updateInterval", m_updateInterval);
     s.setValue("location", m_location);

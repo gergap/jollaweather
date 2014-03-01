@@ -3,6 +3,10 @@
 
 #include <QObject>
 
+/** Settings object for QML.
+ * This class stores the weather settings using QSettings
+ * in the correct paths required by Sailfish OS.
+ */
 class WeatherSettings : public QObject
 {
     Q_OBJECT
@@ -37,6 +41,7 @@ private:
     QString m_pressureUnit;
     QString m_windSpeedUnit;
     QString m_visibilityUnit;
+    QString m_config_dir;
 };
 
 #endif // WEATHERSETTINGS_H

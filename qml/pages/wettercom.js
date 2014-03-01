@@ -1,8 +1,8 @@
 /* Project setting for wetter.com */
 var project = "jollaweather";
 var apiKey = "1f96abed27a0e8e2c92b532a0cc4a79a";
-//var project = "kde";
-//var apiKey = "14747763f53dc0e27f42c945e96532ef";
+var datadir = "/usr/share/harbour-jweather/";
+var icondir = datadir+"icons/";
 
 function mixedSearchUrl(search) {
     var input = project+apiKey+search;

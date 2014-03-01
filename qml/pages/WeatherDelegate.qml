@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "wettercom.js" as Wetter
 
 Component {
     id: delegate
@@ -16,7 +17,7 @@ Component {
             id: imgWeather
             x: Theme.paddingMedium
             anchors.verticalCenter: parent.verticalCenter
-            source: "/usr/share/JWeather/icons/d_"+w+"_L.png";
+            source: Wetter.icondir+"d_"+w+"_L.png";
         }
 
         Image {
@@ -24,7 +25,7 @@ Component {
             anchors.verticalCenter: txtWind.verticalCenter
             anchors.right: txtWind.left
             anchors.rightMargin: Theme.paddingMedium
-            source: "/usr/share/JWeather/icons/"+wd_txt+".png";
+            source: Wetter.icondir+wd_txt+".png";
         }
 
         Text {
