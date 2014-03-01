@@ -60,3 +60,9 @@ void WeatherSettings::save()
     s.setValue("windSpeedUnit", m_windSpeedUnit);
     s.setValue("visibilityUnit", m_visibilityUnit);
 }
+
+void WeatherSettings::clear()
+{
+    QSettings s(m_config_dir, QSettings::IniFormat);
+    s.clear();
+}

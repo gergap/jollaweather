@@ -32,6 +32,7 @@ signals:
 public slots:
     void load();
     void save();
+    void clear();
 
 private:
     int m_updateInterval;
